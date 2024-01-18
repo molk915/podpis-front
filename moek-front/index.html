@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Asymetrycznego Szyfrowania</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      textarea,
+      input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+        color: green;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Demo Asymetrycznego Szyfrowania</h1>
+
+    <button id="generate-keys">Generuj Klucze</button>
+  
+    <form id="asymmetric-encryption-demo">
+      <label for="public-key">Klucz Publiczny:</label>
+      <textarea id="public-key"></textarea>
+  
+      <label for="file-path">Ścieżka Pliku:</label>
+      <input type="text" id="file-path" />
+  
+      <label for="signature">Podpis:</label>
+      <textarea id="signature"></textarea>
+  
+      <button type="button" id="verify-signature">Zweryfikuj Podpis</button>
+  
+      <label for="private-key">Klucz Prywatny:</label>
+      <textarea id="private-key"></textarea>
+  
+      <label for="file-input">Podpisz Plik:</label>
+      <input type="file" id="file-input" />
+      <button type="button" id="sign-file">Podpisz Plik</button>
+    </form>
+  </body>
+</html>
+
+
+
+<script>
+    const singFileButton = document.getElementById('sing-file');
+    const fileInput = document.getElementById('file-input');
+
+    async function sendRequest(selectedFile){
+        const response = await fetch('http://localhost:5000/sing_file', {
+            method: 'POST',
+            body: JSON.stringify({
+                file: selectedFile
+            })
+        });
+
+    }
+
+    singFileButton.addEventListener('click', sendRequest);
+
+</script>
+
